@@ -1,0 +1,81 @@
+query GetPostData($postCount: Int, $cursor: String) {
+  posts(first: $postCount, after: $cursor) {
+    edges {
+      cursor
+      node {
+        id
+        createdAt
+        name
+        tagline
+        description
+        user {
+          id
+          name
+          username
+          headline
+          profileImage
+        }
+        makers {
+          id
+          name
+          username
+          headline
+          profileImage
+        }
+        thumbnail {
+          type
+          url
+          videoUrl
+        }
+        media {
+          type
+          url
+          videoUrl
+        }
+        votesCount
+      }
+    }
+  }
+}
+
+query GetUserVotedPost($userId: ID, $postCount: Int, $cursor: String) {
+  user(id: $userId) {
+    votedPosts(first: $postCount, after: $cursor) {
+      edges {
+        cursor
+        node {
+          id
+          createdAt
+          name
+          tagline
+          description
+          user {
+            id
+            name
+            username
+            headline
+            profileImage
+          }
+          makers {
+            id
+            name
+            username
+            headline
+            profileImage
+          }
+          thumbnail {
+            type
+            url
+            videoUrl
+          }
+          media {
+            type
+            url
+            videoUrl
+          }
+          votesCount
+        }
+      }
+    }
+  }
+}
