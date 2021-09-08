@@ -115,15 +115,15 @@
 				9DC21F6A26E2E10A0038905C /* Models */,
 				9DC21F6626E2E08B0038905C /* Networking */,
 				9DC21F6926E2E0DC0038905C /* Storyboards */,
-				9DC21F6F26E343AD0038905C /* Utility */,
 				9DC21F6826E2E0C20038905C /* ViewControllers */,
+				9DC21F6F26E343AD0038905C /* Utility */,
 				9DC21F7226E347370038905C /* API.swift */,
 				9D83633026E1DB9700CDE3CD /* AppDelegate.swift */,
+				9D83633226E1DB9700CDE3CD /* SceneDelegate.swift */,
+				9D83633926E1DB9A00CDE3CD /* Assets.xcassets */,
 				9D83633E26E1DB9A00CDE3CD /* Info.plist */,
 				9D83634A26E1E01400CDE3CD /* schema.json */,
 				9D83634C26E1F2D300CDE3CD /* product_hunt.graphql */,
-				9D83633926E1DB9A00CDE3CD /* Assets.xcassets */,
-				9D83633226E1DB9700CDE3CD /* SceneDelegate.swift */,
 			);
 			path = ProductHuntTest;
 			sourceTree = "<group>";

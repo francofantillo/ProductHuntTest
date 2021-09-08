@@ -27,18 +27,20 @@ class HomeViewController: PostListViewController {
     
     private func getPostData(postCount: Int, cursor: String?){
         
-        Network.shared.apollo.fetch(query: GetPostDataQuery(postCount: postCount, cursor: cursor)) { [self] result in
+        Network.shared.apollo.fetch(query: GetPostDataQuery(postCount: postCount, cursor: cursor)) { [weak self] result in
 
+        guard let weakSelf = self else { return }
+            
         switch result {
           case .success(let graphQLResult):
             
             if let postsConnection = graphQLResult.data?.posts {
                 let newPosts = postsConnection.edges.compactMap( { $0 } )
-                appendPosts(posts: newPosts)
-                if let cursor = setCursor(posts: newPosts) {
-                    currentCursor = cursor
+                    weakSelf.appendPosts(posts: newPosts)
+                if let cursor = weakSelf.setCursor(posts: newPosts) {
+                    weakSelf.currentCursor = cursor
                 }
-                collectionView.reloadData()
+                weakSelf.collectionView.reloadData()
             }
             
             if let errors = graphQLResult.errors {

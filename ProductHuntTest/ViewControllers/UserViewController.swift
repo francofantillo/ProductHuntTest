@@ -63,18 +63,20 @@ class UserViewController: PostListViewController {
     
     private func loadPosts(postCount: Int, cursor: String?){
         
-        Network.shared.apollo.fetch(query: GetUserVotedPostQuery(userId: selectedUser.id, postCount: postCount, cursor: currentCursor)) { [self] result in
+        Network.shared.apollo.fetch(query: GetUserVotedPostQuery(userId: selectedUser.id, postCount: postCount, cursor: currentCursor)) { [weak self] result in
 
+        guard let weakSelf = self else { return }
+            
         switch result {
           case .success(let graphQLResult):
             
             if let newPosts = graphQLResult.data?.user?.votedPosts.edges {
 
-                self.appendVotedPosts(posts: newPosts)
-                if let cursor = setCursor(posts: newPosts) {
-                    currentCursor = cursor
+                weakSelf.appendVotedPosts(posts: newPosts)
+                if let cursor = weakSelf.setCursor(posts: newPosts) {
+                    weakSelf.currentCursor = cursor
                 }
-                collectionView.reloadData()
+                weakSelf.collectionView.reloadData()
             }
             
             if let errors = graphQLResult.errors {
