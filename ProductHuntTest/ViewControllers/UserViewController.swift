@@ -18,12 +18,10 @@ class UserViewController: PostListViewController {
     
     let selectedUser: CommonUser
     
-    var currentCursor: String?
-    
     //MARK: - Initializers
     
     init?(coder: NSCoder, user: CommonUser) {
-        self.selectedUser = user
+        selectedUser = user
         super.init(coder: coder)
     }
 
@@ -36,7 +34,7 @@ class UserViewController: PostListViewController {
         configure()
         configureCollectionView()
         showUserData()
-        loadPosts(postCount: 10, cursor: nil)
+        loadPosts(postCount: 10, cursor: nil, user: selectedUser)
     }
     
     //MARK: - Configure Views
@@ -61,46 +59,21 @@ class UserViewController: PostListViewController {
     
     //MARK: - Load Data
     
-    private func loadPosts(postCount: Int, cursor: String?){
+    private func loadPosts(postCount: Int, cursor: String?, user: CommonUser){
         
-        Network.shared.apollo.fetch(query: GetUserVotedPostQuery(userId: selectedUser.id, postCount: postCount, cursor: currentCursor)) { [weak self] result in
-
-        guard let weakSelf = self else { return }
+        loadPosts(query: GetUserVotedPostQuery(userId: user.id, postCount: postCount, cursor: currentCursor)) { [weak self] selectionSet in
             
-        switch result {
-          case .success(let graphQLResult):
-            
-            if let newPosts = graphQLResult.data?.user?.votedPosts.edges {
-
-                weakSelf.appendVotedPosts(posts: newPosts)
-                if let cursor = weakSelf.setCursor(posts: newPosts) {
-                    weakSelf.currentCursor = cursor
-                }
-                weakSelf.collectionView.reloadData()
-            }
-            
-            if let errors = graphQLResult.errors {
-                Utility.handleGraphQLError(errors: errors)
-            }
-            
-          case .failure(let error):
-            PostAlerts.presentAlertController(titleMsg: "Error", errorMsg: "Unable to retrieve posts with error: \(error)")
-          }
+            guard let weakSelf = self else { return }
+            weakSelf.appendVotedPosts(set: selectionSet)
         }
     }
     
     //MARK: - Load Next Data
     
     override func updateNextSet() {
-        if posts.count % 10 == 0{
-            loadPosts(postCount: 10, cursor: currentCursor)
+        if posts.count % 10 == 0 {
+            loadPosts(postCount: 10, cursor: currentCursor, user: selectedUser)
         }
-    }
-    
-    private func setCursor(posts: [VotedPost]) -> String? {
-        guard let lastPost = posts.last else { return nil }
-        let cursor = lastPost.cursor
-        return cursor
     }
     
     //MARK: - Navigation

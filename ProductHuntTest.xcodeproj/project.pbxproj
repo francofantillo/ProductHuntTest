@@ -37,6 +37,8 @@
 		9DC21F7C26E351160038905C /* PostCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC21F7B26E351160038905C /* PostCollectionViewFlowLayout.swift */; };
 		9DC21F7F26E3519B0038905C /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC21F7D26E3519B0038905C /* PostCell.swift */; };
 		9DC21F8026E3519B0038905C /* PostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DC21F7E26E3519B0038905C /* PostCell.xib */; };
+		9DD07D5426F469E00050DC4B /* AsyncFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD07D5326F469E00050DC4B /* AsyncFetcher.swift */; };
+		9DD07D5626F46B5F0050DC4B /* AsyncFetcherOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD07D5526F46B5F0050DC4B /* AsyncFetcherOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +72,8 @@
 		9DC21F7B26E351160038905C /* PostCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		9DC21F7D26E3519B0038905C /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		9DC21F7E26E3519B0038905C /* PostCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostCell.xib; sourceTree = "<group>"; };
+		9DD07D5326F469E00050DC4B /* AsyncFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncFetcher.swift; sourceTree = "<group>"; };
+		9DD07D5526F46B5F0050DC4B /* AsyncFetcherOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncFetcherOperation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,9 +173,11 @@
 		9DC21F6F26E343AD0038905C /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				9DC21F7026E343DE0038905C /* Utility.swift */,
+				9DD07D5326F469E00050DC4B /* AsyncFetcher.swift */,
+				9DD07D5526F46B5F0050DC4B /* AsyncFetcherOperation.swift */,
 				9DC21F7626E34D9B0038905C /* PostAlerts.swift */,
 				9DC21F7426E34C480038905C /* TypeAlias.swift */,
+				9DC21F7026E343DE0038905C /* Utility.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -319,10 +325,12 @@
 				9DC21F6E26E2E3B40038905C /* CommonUser.swift in Sources */,
 				9D498F2B26E3DC110071F638 /* PostViewController.swift in Sources */,
 				9DC21F7526E34C480038905C /* TypeAlias.swift in Sources */,
+				9DD07D5626F46B5F0050DC4B /* AsyncFetcherOperation.swift in Sources */,
 				9D3B8DD626E857CE007FAB03 /* CommonPost.swift in Sources */,
 				9D498F2F26E3E6710071F638 /* ImageCollectionViewFlowLayout.swift in Sources */,
 				9DC21F7726E34D9B0038905C /* PostAlerts.swift in Sources */,
 				9D83633126E1DB9700CDE3CD /* AppDelegate.swift in Sources */,
+				9DD07D5426F469E00050DC4B /* AsyncFetcher.swift in Sources */,
 				9D83633326E1DB9700CDE3CD /* SceneDelegate.swift in Sources */,
 				9DC21F7326E347370038905C /* API.swift in Sources */,
 				9DC21F7F26E3519B0038905C /* PostCell.swift in Sources */,

@@ -27,6 +27,28 @@ class Utility {
         
         PostAlerts.presentAlertController(titleMsg: "Error", errorMsg: message)
     }
+    
+    static func isAnimatedImage(_ data: Data) -> Bool {
+        if let source = CGImageSourceCreateWithData(data as CFData, nil) {
+
+            let count = CGImageSourceGetCount(source)
+            return count > 1
+        }
+        return false
+    }
+    
+    static func fromGif(gifData: Data) -> [UIImage]? {
+
+        guard let source =  CGImageSourceCreateWithData(gifData as CFData, nil) else { return nil }
+        var images = [UIImage]()
+        let imageCount = CGImageSourceGetCount(source)
+        for i in 0 ..< imageCount {
+            if let image = CGImageSourceCreateImageAtIndex(source, i, nil) {
+                images.append(UIImage(cgImage: image))
+            }
+        }
+        return images
+    }
 }
 
 extension Data {

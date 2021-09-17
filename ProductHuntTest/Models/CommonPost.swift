@@ -5,10 +5,12 @@
 //  Created by Franco on 2021-09-07.
 //
 
+import Foundation
 import Apollo
 
  class CommonPost {
 
+    let id = UUID()
     let name: String
     let username: String
     let tagline: String
@@ -19,6 +21,7 @@ import Apollo
     let users: [CommonUser]
     
     init(post: Post) {
+        
         self.name = post.node.name
         self.username = post.node.user.username
         self.tagline = post.node.tagline
@@ -43,6 +46,7 @@ import Apollo
     }
     
     init(votedPost: VotedPost) {
+        
         self.name = votedPost.node.name
         self.username = votedPost.node.user.username
         self.tagline = votedPost.node.tagline

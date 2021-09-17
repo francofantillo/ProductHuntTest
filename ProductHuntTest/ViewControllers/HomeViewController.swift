@@ -13,7 +13,9 @@ class HomeViewController: PostListViewController {
     // Post type is a tyealias of <QUERY>.Data.Post.Edge
     // See the TypeAlias.swift file.
     
-    var currentCursor: String!
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
     
     //MARK: - View LifeCycle
     
@@ -27,29 +29,10 @@ class HomeViewController: PostListViewController {
     
     private func getPostData(postCount: Int, cursor: String?){
         
-        Network.shared.apollo.fetch(query: GetPostDataQuery(postCount: postCount, cursor: cursor)) { [weak self] result in
-
-        guard let weakSelf = self else { return }
+        loadPosts(query: GetPostDataQuery(postCount: 10, cursor: cursor)) { [weak self] selectionSet in
             
-        switch result {
-          case .success(let graphQLResult):
-            
-            if let postsConnection = graphQLResult.data?.posts {
-                let newPosts = postsConnection.edges.compactMap( { $0 } )
-                    weakSelf.appendPosts(posts: newPosts)
-                if let cursor = weakSelf.setCursor(posts: newPosts) {
-                    weakSelf.currentCursor = cursor
-                }
-                weakSelf.collectionView.reloadData()
-            }
-            
-            if let errors = graphQLResult.errors {
-                Utility.handleGraphQLError(errors: errors)
-            }
-            
-          case .failure(let error):
-            PostAlerts.presentAlertController(titleMsg: "Error", errorMsg: "Unable to retrieve posts with error: \(error)")
-          }
+            guard let weakSelf = self else { return }
+            weakSelf.appendPosts(set: selectionSet)
         }
     }
     

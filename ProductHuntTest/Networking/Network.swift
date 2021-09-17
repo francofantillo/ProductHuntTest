@@ -21,7 +21,7 @@ class Network {
     
     static let shared = Network()
     
-    private var images = NSCache<NSString, NSData>()
+    //private var images = NSCache<NSString, NSData>()
     let session: URLSession
     
     init() {
@@ -55,11 +55,6 @@ class Network {
     }
     
     private func download(imageURL: URL, completion: @escaping (Data?, Error?) -> (Void)) {
-        if let imageData = images.object(forKey: imageURL.absoluteString as NSString) {
-          print("using cached images")
-          completion(imageData as Data, nil)
-          return
-        }
         
         let task = session.downloadTask(with: imageURL) { localUrl, response, error in
           if let error = error {
@@ -79,7 +74,6 @@ class Network {
           
           do {
             let data = try Data(contentsOf: localUrl)
-            self.images.setObject(data as NSData, forKey: imageURL.absoluteString as NSString)
             completion(data, nil)
           } catch let error {
             completion(nil, error)

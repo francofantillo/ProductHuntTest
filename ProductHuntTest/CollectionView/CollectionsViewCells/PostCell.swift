@@ -16,6 +16,7 @@ class PostCell: UICollectionViewCell {
     @IBOutlet weak var voteCount: UILabel!
     @IBOutlet weak var voteContainer: UIView!
     @IBOutlet weak var postedBy: UILabel!
+    var id : UUID!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,6 +45,10 @@ class PostCell: UICollectionViewCell {
         layer.shadowOpacity = 0.5
         layer.masksToBounds = false
         layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: contentView.layer.cornerRadius).cgPath
+    }
+    
+    override func prepareForReuse() {
+        postThumbnail.stopAnimating()
     }
     
     override func awakeFromNib() {
